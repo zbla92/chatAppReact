@@ -1,0 +1,70 @@
+.login {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .wrapper {
+    height: 600px;
+    width: 500px;
+    border-radius: 32px;
+    background-color: #292d45;
+  }
+
+  .title {
+    height: 70px;
+    border-bottom: 1px solid #393f5f;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      text-align: center;
+      font-size: 32px;
+      font-weight: 200;
+    }
+  }
+}
+
+.logo {
+  height: 60px;
+  width: 60px;
+  position: absolute;
+  top: 16px;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100% - 70px);
+  position: relative;
+  .input_wrap {
+    width: 80%;
+    position: relative;
+    margin-bottom: 60px;
+    label {
+      position: absolute;
+      top: -20px;
+      color: rgba(255, 255, 255, 0.446);
+      font-size: 12px;
+    }
+
+    input {
+      width: 100%;
+      height: 40px;
+      font-size: 24px;
+      background-color: transparent;
+      border: none;
+      color: white;
+      outline: none;
+      border-bottom: 2px solid hsla(231, 25%, 30%, 0.25);
+      &:focus {
+        border-bottom: 2px solid hsla(231, 25%, 30%, 1);
+      }
+    }
+  }
+}
