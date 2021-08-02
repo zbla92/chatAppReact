@@ -1,43 +1,47 @@
-import axios from "axios";
-import qs from "qs";
+import axios from 'axios';
+import qs from 'qs';
+import Cookies from 'js-cookie';
 
 export const config = {
-  baseURL: "http://localhost:4000",
+  baseURL: 'http://localhost:4000',
 };
-const setHeaders = (headerToken) => {
-  const headers = {};
-  if (headerToken) {
-    headers.Authorization = `Bearer ${headerToken}`;
+
+axios.interceptors.request.use(
+  async (configData) => {
+    const token = Cookies.get('access_token') || configData.token;
+    if (token) {
+      // eslint-disable-next-line no-param-reassign
+      configData.headers.Authorization = `Bearer ${token}`;
+    }
+    return configData;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return { headers };
-};
+);
 
 const instance = (() => {
   const get = (url, params) => {
-    const { token, ...rest } = params;
-    const args = setHeaders(token);
-    return axios.get(`${config.baseURL}${url}?${qs.stringify(rest)}`, args);
+    if (params?.token) {
+      return axios.get(`${config.baseURL}${url}`, params);
+    }
+    return axios.get(`${config.baseURL}${url}`);
   };
 
   const post = (url, params) => {
-    const { token, ...rest } = params;
-    const args = setHeaders(token);
-    return axios.post(`${config.baseURL}${url}`, rest, args);
+    return axios.post(`${config.baseURL}${url}`, params);
   };
 
   const patch = (url, params) => {
-    const args = setHeaders(params.token);
-    return axios.patch(`${config.baseURL}${url}`, params, args);
+    return axios.patch(`${config.baseURL}${url}`, params);
   };
 
   const put = (url, params) => {
-    const args = setHeaders(params.token);
-    return axios.put(`${config.baseURL}${url}`, params, args);
+    return axios.put(`${config.baseURL}${url}`, params);
   };
 
   const del = (url, params) => {
-    const args = setHeaders(params.token);
-    return axios.delete(`${config.baseURL}${url}`, { ...params, ...args });
+    return axios.delete(`${config.baseURL}${url}`, params);
   };
 
   return {
