@@ -1,16 +1,22 @@
-import React, { useState } from "react";
-import { signInService } from "../../services/userService";
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { ReactComponent as Logo } from "../../assets/imgs/nasa_logo.svg";
-import styles from "./login.module.scss";
+import { loginUser } from '../../state/actions/userActions';
 
-const initialCredentials = { email: "", password: "" };
+import { ReactComponent as Logo } from '../../assets/imgs/nasa_logo.svg';
+import styles from './login.module.scss';
+
+const initialCredentials = { email: '', password: '' };
 
 const Login = () => {
   const [credentials, setCredentials] = useState(initialCredentials);
 
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const onSignIn = () => {
-    signInService(credentials);
+    dispatch(loginUser(credentials, history));
   };
 
   return (
@@ -22,26 +28,28 @@ const Login = () => {
         <div className={styles.body}>
           <Logo className={styles.logo} />
           <div className={styles.input_wrap}>
-            <label for="email">Email:</label>
+            <label for='email'>Email:</label>
             <input
-              type="text"
-              name="email"
+              type='text'
+              name='email'
               onChange={(e) => {
                 setCredentials({ ...credentials, email: e.target.value });
               }}
             />
           </div>
           <div className={styles.input_wrap}>
-            <label for="password">Password:</label>
+            <label for='password'>Password:</label>
             <input
-              type="password"
-              name="password"
+              type='password'
+              name='password'
               onChange={(e) => {
                 setCredentials({ ...credentials, password: e.target.value });
               }}
             />
           </div>
-          <button onClick={onSignIn}>Sign in</button>
+          <button className={styles.signin_button} onClick={onSignIn}>
+            Sign in
+          </button>
         </div>
       </div>
     </div>
