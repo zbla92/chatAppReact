@@ -3,7 +3,7 @@ import qs from 'qs';
 import Cookies from 'js-cookie';
 
 export const config = {
-  baseURL: 'http://localhost:4000',
+  baseURL: 'https://chat-app-bcknd.herokuapp.com',
 };
 
 axios.interceptors.request.use(
