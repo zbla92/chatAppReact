@@ -1,9 +1,11 @@
 import axios from "axios";
-import qs from "qs";
 import Cookies from "js-cookie";
 
 export const config = {
-  baseURL: "http://localhost:4000",
+  baseURL:
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:4000"
+      : "https://chat-app-bcknd.herokuapp.com/",
 };
 
 axios.interceptors.request.use(
