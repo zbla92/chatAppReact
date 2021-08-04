@@ -6,7 +6,7 @@ const currentUrl = window.location.href;
 export const config = {
   baseURL: currentUrl.includes('localhost')
     ? 'http://localhost:4000'
-    : 'https://chat-app-bcknd.herokuapp.com/',
+    : 'https://chat-app-bcknd.herokuapp.com',
 };
 
 console.log(process.env.NODE_ENV);
