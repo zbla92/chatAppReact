@@ -1,16 +1,19 @@
-import axios from "axios";
-import Cookies from "js-cookie";
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
+const currentUrl = window.location.href;
 
 export const config = {
-  baseURL:
-    process.env.NODE_ENV === "development"
-      ? "http://localhost:4000"
-      : "https://chat-app-bcknd.herokuapp.com/",
+  baseURL: currentUrl.includes('localhost')
+    ? 'http://localhost:4000'
+    : 'https://chat-app-bcknd.herokuapp.com/',
 };
+
+console.log(process.env.NODE_ENV);
 
 axios.interceptors.request.use(
   async (configData) => {
-    const token = Cookies.get("access_token") || configData.token;
+    const token = Cookies.get('access_token') || configData.token;
     if (token) {
       // eslint-disable-next-line no-param-reassign
       configData.headers.Authorization = `Bearer ${token}`;
