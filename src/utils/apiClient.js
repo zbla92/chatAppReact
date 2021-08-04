@@ -1,14 +1,14 @@
-import axios from 'axios';
-import qs from 'qs';
-import Cookies from 'js-cookie';
+import axios from "axios";
+import qs from "qs";
+import Cookies from "js-cookie";
 
 export const config = {
-  baseURL: 'https://chat-app-bcknd.herokuapp.com',
+  baseURL: "http://localhost:4000",
 };
 
 axios.interceptors.request.use(
   async (configData) => {
-    const token = Cookies.get('access_token') || configData.token;
+    const token = Cookies.get("access_token") || configData.token;
     if (token) {
       // eslint-disable-next-line no-param-reassign
       configData.headers.Authorization = `Bearer ${token}`;

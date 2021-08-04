@@ -1,4 +1,4 @@
-.login {
+.register {
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -6,7 +6,7 @@
   justify-content: center;
 
   .wrapper {
-    height: 600px;
+    height: 800px;
     width: 500px;
     border-radius: 32px;
     background-color: #292d45;
@@ -70,17 +70,12 @@
 }
 
 .signin_button {
+  position: absolute;
+  bottom: 30px;
   border: none;
   height: 40px;
   width: 140px;
   border-radius: 50px;
   background-color: rgb(89, 169, 131);
   color: white;
-}
-
-.errors {
-  color: rgb(197, 65, 56);
-  position: absolute;
-  top: 85px;
-  font-size: 12px;
 }
