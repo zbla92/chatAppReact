@@ -1,8 +1,8 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from "redux";
 
-import { LOGIN } from '../constants';
+import { LOGIN, LOGIN_FAIL } from "../constants";
 
-const loginUser = (state = { error: null, data: {} }, action) => {
+const login = (state = { error: null, data: {} }, action) => {
   switch (action.type) {
     case LOGIN:
       return {
@@ -10,9 +10,15 @@ const loginUser = (state = { error: null, data: {} }, action) => {
         data: action.payload,
       };
 
+    case LOGIN_FAIL:
+      return {
+        ...state,
+        error: action.payload,
+      };
+
     default:
       return state;
   }
 };
 
-export default combineReducers({ loginUser });
+export default combineReducers({ login });
