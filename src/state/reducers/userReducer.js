@@ -1,19 +1,36 @@
-import { combineReducers } from "redux";
+import { combineReducers } from 'redux';
 
-import { LOGIN, LOGIN_FAIL } from "../constants";
+import {
+  LOGIN,
+  LOGIN_FAIL,
+  LOGIN_LOADING,
+  GET_USER,
+  GET_USER_LOADING,
+  GET_USER_FAIL,
+} from '../constants';
 
-const login = (state = { error: null, data: {} }, action) => {
+const authInitialState = { error: null, data: null, loading: false };
+
+const auth = (state = authInitialState, action) => {
   switch (action.type) {
     case LOGIN:
       return {
         ...state,
         data: action.payload,
+        loading: false,
+      };
+
+    case LOGIN_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
 
     case LOGIN_FAIL:
       return {
         ...state,
         error: action.payload,
+        loading: false,
       };
 
     default:
@@ -21,4 +38,23 @@ const login = (state = { error: null, data: {} }, action) => {
   }
 };
 
-export default combineReducers({ login });
+const userDataInitialState = { error: null, data: null, loading: false };
+
+const userData = (state = userDataInitialState, action) => {
+  switch (action.type) {
+    case GET_USER:
+      return { ...state, data: action.payload, loading: false };
+
+    case GET_USER_LOADING: {
+      return { ...state, loading: true };
+    }
+
+    case GET_USER_FAIL:
+      return { ...state, error: action.payload, loading: false };
+
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({ auth, userData });

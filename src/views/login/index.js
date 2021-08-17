@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
-import { loginUser } from "../../state/actions/userActions";
+import { loginUser } from '../../state/actions/userActions';
 
-import { ReactComponent as Logo } from "../../assets/imgs/nasa_logo.svg";
-import styles from "./login.module.scss";
+import { ReactComponent as Logo } from '../../assets/imgs/nasa_logo.svg';
+import styles from './login.module.scss';
 
-const initialCredentials = { email: "", password: "" };
+const initialCredentials = { email: '', password: '' };
 
 const Login = () => {
   const [credentials, setCredentials] = useState(initialCredentials);
-  const { error } = useSelector((state) => state.user.login);
+  const { error } = useSelector((state) => state.user.auth);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -30,20 +30,20 @@ const Login = () => {
           <Logo className={styles.logo} />
           {error?.error && <p className={styles.errors}>{error.error}</p>}
           <div className={styles.input_wrap}>
-            <label for="email">Email:</label>
+            <label for='email'>Email:</label>
             <input
-              type="text"
-              name="email"
+              type='text'
+              name='email'
               onChange={(e) => {
                 setCredentials({ ...credentials, email: e.target.value });
               }}
             />
           </div>
           <div className={styles.input_wrap}>
-            <label for="password">Password:</label>
+            <label for='password'>Password:</label>
             <input
-              type="password"
-              name="password"
+              type='password'
+              name='password'
               onChange={(e) => {
                 setCredentials({ ...credentials, password: e.target.value });
               }}
