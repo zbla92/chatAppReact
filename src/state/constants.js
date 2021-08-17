@@ -1,4 +1,10 @@
-export const LOGIN = "LOGIN";
-export const REGISTER_USER = "REGISTER_USER";
-export const LOGIN_FAIL = "LOGIN_FAIL";
-export const REGISTER_USER_FAIL = "REGISTER_USER_FAIL";
+export const LOGIN = 'LOGIN/SUCCESS';
+export const LOGIN_LOADING = 'LOGIN/LOADING';
+export const REGISTER_USER = 'REGISTER_USER/SUCCESS';
+export const LOGIN_FAIL = 'LOGIN/FAIL';
+export const REGISTER_USER_FAIL = 'REGISTER_USER/FAIL';
+export const REGISTER_USER_LOADING = 'REGISTER_USER/LOADING';
+
+export const GET_USER = 'GET_USER/SUCCESS';
+export const GET_USER_LOADING = 'GET_USER/LOADING';
+export const GET_USER_FAIL = 'GET_USER/FAIL';
