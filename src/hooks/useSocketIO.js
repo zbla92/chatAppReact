@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-// socket io test
+import { baseURL } from '../utils/helpers';
 import io from 'socket.io-client';
 
 const useSocketIO = () => {
@@ -12,7 +12,7 @@ const useSocketIO = () => {
   useEffect(() => {
     if (user?.id && !socket) {
       setSocket(
-        io.connect('http://localhost:4000', {
+        io.connect(baseURL, {
           path: '/socket.io',
           query: { userId: user.id, userEmail: user.email },
         })
