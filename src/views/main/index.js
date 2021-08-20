@@ -1,4 +1,8 @@
 import React from 'react';
+import Chat from '../../components/Chat/index.js';
+import OnlineFriends from '../../components/OnlineFriends/index.js';
+
+import OptionsSection from '../../components/OptionsSection.js';
 
 import styles from './Main.module.scss';
 
@@ -14,9 +18,10 @@ const Main = ({ socket }) => {
 
   return (
     <div className={styles.main}>
-      Main App
-      <div>
-        <button onClick={nekaFunkcija}>Klikni me</button>
+      <div className={styles.wrapper}>
+        <OnlineFriends />
+        <Chat />
+        <OptionsSection />
       </div>
     </div>
   );

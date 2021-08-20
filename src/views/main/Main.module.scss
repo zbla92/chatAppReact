@@ -1,3 +1,16 @@
 .main {
-  color: red;
+  display: flex;
+  width: 100vw;
+  height: 90vh;
+  margin: 5vh 0;
+  justify-content: center;
+}
+
+.wrapper {
+  width: 80vw;
+  display: flex;
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+  position: relative;
 }

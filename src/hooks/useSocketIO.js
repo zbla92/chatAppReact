@@ -17,7 +17,12 @@ const useSocketIO = () => {
       setSocket(
         io.connect(baseURL, {
           path: '/socket.io',
-          query: { userId: user.id, userEmail: user.email },
+          query: {
+            userId: user.id,
+            userEmail: user.email,
+            name: `${user.firstName} ${user.lastName}`,
+            profilePicture: user.profilePicture,
+          },
         })
       );
     }

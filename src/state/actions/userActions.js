@@ -20,7 +20,7 @@ export const getUser = () => async (dispatch) => {
     const data = await getAuthenticatedUserService();
     dispatch({ type: GET_USER, payload: data.user });
   } catch (err) {
-    dispatch({ action: GET_USER_FAIL, payload: err });
+    dispatch({ type: GET_USER_FAIL, payload: err });
   }
 };
 
