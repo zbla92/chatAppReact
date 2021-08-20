@@ -1,0 +1,19 @@
+.onlineFriends {
+  width: 440px;
+  height: 100%;
+  background-color: #2a2c44;
+  border-right: 1px solid #31344b;
+
+  h4 {
+    text-align: center;
+    color: white;
+    font-size: 26px;
+    font-weight: 400;
+    margin-top: 40px;
+    letter-spacing: 1px;
+  }
+
+  &_container {
+    padding: 0 20px 0 110px;
+  }
+}

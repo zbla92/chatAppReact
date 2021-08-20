@@ -1,0 +1,36 @@
+.chat_card {
+  display: flex;
+  height: 75px;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #2e334d;
+  margin: 8px 0;
+
+  img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    margin: 0 16px;
+    object-fit: cover;
+  }
+
+  .content {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    h5 {
+      color: white;
+      font-weight: 400;
+      font-size: 14px;
+      margin: 2px 0;
+    }
+    p {
+      font-size: 14px;
+      color: white;
+      margin: 0;
+      font-weight: 200;
+      opacity: 0.7;
+    }
+  }
+}

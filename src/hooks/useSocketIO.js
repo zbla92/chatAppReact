@@ -1,36 +1,53 @@
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { baseURL } from '../utils/helpers';
 import io from 'socket.io-client';
+import { getOnlineFriends } from '../state/actions/friendActions';
 
 const useSocketIO = () => {
   const [socket, setSocket] = useState(null);
 
   const user = useSelector((state) => state.user?.userData?.data);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     if (user?.id && !socket) {
       setSocket(
         io.connect(baseURL, {
           path: '/socket.io',
-          query: { userId: user.id, userEmail: user.email },
+          query: {
+            userId: user.id,
+            userEmail: user.email,
+            name: `${user.firstName} ${user.lastName}`,
+            profilePicture: user.profilePicture,
+          },
         })
       );
+    }
 
-      if (socket) {
-        socket.on('connect', (socket) => {
-          console.log('[SOCKET]', 'connected');
-        });
+    if (socket) {
+      socket.on('connect', (socket) => {
+        console.log('[SOCKET]', 'connected');
+      });
 
-        socket.on('chat', (args) => {
-          console.log(args);
-        });
+      socket.on('chat', (args) => {
+        console.log(args);
+      });
 
-        socket.on('error', function error(err) {
-          console.log('[SOCKET][ERROR]', err);
-        });
-      }
+      socket.on('online_friends', (args) => {
+        console.log(args, 'STIZU');
+        dispatch(getOnlineFriends(args.friends, user.email));
+      });
+
+      socket.on('disconnect', () => {
+        console.log(socket.id, 'se diskonektovao');
+      });
+
+      socket.on('error', function error(err) {
+        console.log('[SOCKET][ERROR]', err);
+      });
     }
   }, [user, socket]);
 

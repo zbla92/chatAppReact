@@ -12,17 +12,15 @@ function App() {
   return (
     <Router>
       <Switch>
-        <div className={styles.app}>
-          <Route exact path='/'>
-            <Main socket={socket} />
-          </Route>
-          <Route exact path='/sign-in'>
-            <Login />
-          </Route>
-          <Route exact path='/register'>
-            <Register />
-          </Route>
-        </div>
+        <Route exact path='/'>
+          <Main socket={socket} />
+        </Route>
+        <Route exact path='/sign-in'>
+          <Login />
+        </Route>
+        <Route exact path='/register'>
+          <Register />
+        </Route>
       </Switch>
     </Router>
   );
