@@ -1,0 +1,26 @@
+.message {
+  width: 100%;
+  display: flex;
+  color: white;
+  font-weight: 300;
+
+
+  &_wrapper {
+    height: fit-content;
+    padding: 18px;
+    margin: 8px;
+    border-radius: 0 16px 16px 16px;
+    background-color: #2e334d;
+    width: fit-content;
+    min-width: 100px;
+  }
+}
+.isMine {
+  justify-content: flex-end;
+  .message_wrapper {
+    background-color: #F94D89;
+    text-align: right;
+    border-radius: unset;
+    border-radius: 16px 0 16px 16px;
+  }
+}

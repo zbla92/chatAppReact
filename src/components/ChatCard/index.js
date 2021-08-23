@@ -1,12 +1,17 @@
 import React from 'react';
+import cn from 'classnames';
 
 import profilePicPlaceholder from '../../assets/imgs/profile_picture.png';
 
 import styles from './ChatCard.module.scss';
 
-const ChatCard = ({ name, profilePicture }) => {
+const ChatCard = ({ name, profilePicture, activateChat, isActive }) => {
   return (
-    <div className={styles.chat_card}>
+    <div
+      className={cn(styles.chat_card, isActive && styles.active_card)}
+      onClick={activateChat}
+      role='presentation'
+    >
       <img src={profilePicture || profilePicPlaceholder} alt='profile_image' />
       <div className={styles.content}>
         <h5>{name}</h5>
