@@ -3,7 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { baseURL } from '../utils/helpers';
 import io from 'socket.io-client';
-import { getOnlineFriends } from '../state/actions/friendActions';
+import {
+  getOnlineFriends,
+  receivedNewMessage,
+} from '../state/actions/friendActions';
 
 const useSocketIO = () => {
   const [socket, setSocket] = useState(null);
@@ -48,6 +51,8 @@ const useSocketIO = () => {
       socket.on('error', function error(err) {
         console.log('[SOCKET][ERROR]', err);
       });
+
+      socket.on('direct_message', (data) => dispatch(receivedNewMessage(data)));
     }
   }, [user, socket]);
 
