@@ -9,6 +9,7 @@ import styles from './Main.module.scss';
 
 const Main = () => {
   const [activeChat, setActiveChat] = useState(null);
+  const [activeTab, setActiveTab] = useState('chat');
 
   const socket = useSocketIO();
 
@@ -17,7 +18,11 @@ const Main = () => {
       <div className={styles.wrapper}>
         <OnlineFriends setActiveChat={setActiveChat} activeChat={activeChat} />
         <Chat activeChat={activeChat} socket={socket} />
-        <OptionsSection socket={socket} />
+        <OptionsSection
+          socket={socket}
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+        />
       </div>
     </div>
   );

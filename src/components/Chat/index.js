@@ -6,10 +6,12 @@ import { ReactComponent as SendIcon } from '../../assets/imgs/send.svg';
 import { ReactComponent as EmojiIcon } from '../../assets/imgs/happy.svg';
 import { ReactComponent as GalleryIcon } from '../../assets/imgs/gallery.svg';
 import { ReactComponent as AttachIcon } from '../../assets/imgs/attach.svg';
+import { ReactComponent as MoreIcon } from '../../assets/imgs/more.svg';
 
 import Message from '../Message';
 
 import styles from './Chat.module.scss';
+import UserInfo from './components/UserInfo';
 
 const Chat = ({ activeChat, socket }) => {
   const [message, setMessage] = useState('');
@@ -43,12 +45,11 @@ const Chat = ({ activeChat, socket }) => {
       {activeChat && (
         <>
           <div className={styles.top}>
-            <img
-              className={styles.profile_image}
-              src={activeChat?.profilePicture}
-              alt='profile'
+            <UserInfo
+              name={activeChat.name}
+              profilePicture={activeChat.profilePicture}
             />
-            <div></div>
+            <MoreIcon className={styles.more_icon} />
           </div>
           <div className={styles.content}>
             <div className={styles.scroll}>
