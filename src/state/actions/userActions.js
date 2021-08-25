@@ -7,6 +7,7 @@ import {
   REGISTER_USER_LOADING,
   GET_USER,
   GET_USER_FAIL,
+  LOGOUT_USER,
 } from '../constants';
 import {
   signInService,
@@ -24,23 +25,27 @@ export const getUser = () => async (dispatch) => {
   }
 };
 
-export const loginUser = (params, history) => async (dispatch) => {
+export const loginUser = (params) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_LOADING });
 
     const data = await signInService(params);
 
     if (data?.accessToken) Cookies.set('access_token', data.accessToken);
-    if (data?.refreshToken) Cookies.set('refreshToken', data.refreshToken);
+    if (data?.refreshToken) Cookies.set('refresh_token', data.refreshToken);
     dispatch({ type: LOGIN, payload: data });
 
     dispatch(getUser());
-
-    history.push('/');
   } catch (error) {
     dispatch({ type: LOGIN_FAIL, payload: error.data });
     console.log('[ERROR][LOGIN_FAIL]: ', error);
   }
+};
+
+export const logoutUser = () => (dispatch) => {
+  dispatch({ type: LOGOUT_USER });
+  Cookies.remove('access_token');
+  Cookies.remove('refresh_token');
 };
 
 export const registerUser = (params, history) => async (dispatch) => {

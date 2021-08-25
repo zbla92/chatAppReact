@@ -4,7 +4,6 @@
   color: white;
   font-weight: 300;
 
-
   &_wrapper {
     height: fit-content;
     padding: 18px;
@@ -13,12 +12,13 @@
     background-color: #2e334d;
     width: fit-content;
     min-width: 100px;
+    max-width: 60%;
   }
 }
 .isMine {
   justify-content: flex-end;
   .message_wrapper {
-    background-color: #F94D89;
+    background-color: #f94d89;
     text-align: right;
     border-radius: unset;
     border-radius: 16px 0 16px 16px;

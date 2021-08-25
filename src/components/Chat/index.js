@@ -22,8 +22,9 @@ const Chat = ({ activeChat, socket }) => {
   const dispatch = useDispatch();
 
   const sendMessage = () => {
+    if (message.length < 1) return;
     socket.emit('direct_message', {
-      to: activeChat.id,
+      toUserId: activeChat.userId,
       fromUserId: user.id,
       message,
     });
@@ -69,9 +70,11 @@ const Chat = ({ activeChat, socket }) => {
                 onChange={(e) => setMessage(e.target.value)}
               ></textarea>
             </div>
-            <button className={styles.send_button} onClick={sendMessage}>
-              <SendIcon />
-            </button>
+            <div className={styles.send_container}>
+              <button className={styles.send_button} onClick={sendMessage}>
+                <SendIcon />
+              </button>
+            </div>
           </div>
         </>
       )}
