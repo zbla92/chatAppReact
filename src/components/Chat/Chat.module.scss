@@ -1,3 +1,5 @@
+@import '../../assets//styles/globals.scss';
+
 .chat {
   width: calc(100% - 440px);
   height: 100%;
@@ -11,14 +13,21 @@
     justify-content: space-between;
     align-items: center;
 
-    .profile_image {
-      height: 64px;
-      width: 64px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin: 0 28px;
+    .more_icon {
+      height: 20px;
+      width: 20px;
+      fill: white;
+      opacity: 0.6;
+      padding: 16px;
+      transition: 0.2s;
+
+      &:hover {
+        opacity: 1;
+        cursor: pointer;
+      }
     }
   }
+
   .content {
     height: 80.5%;
     overflow: scroll;
@@ -94,7 +103,7 @@
     width: 55px;
     border-radius: 50%;
     border: none;
-    background-color: #f94d89;
+    background-color: $primary_color;
 
     box-shadow: 0px 0px 2px 0px rgba(140, 136, 136, 0.75);
     transition: 0.2s;

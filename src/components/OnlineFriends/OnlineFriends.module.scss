@@ -3,6 +3,7 @@
   height: 100%;
   background-color: #2a2c44;
   border-right: 1px solid #31344b;
+  position: relative;
 
   h4 {
     text-align: center;
@@ -16,4 +17,12 @@
   &_container {
     padding: 0 20px 0 110px;
   }
+}
+
+.whoami {
+  padding: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.055);
+  position: absolute;
+  bottom: 0;
+  padding: 6px 50px 6px 104px;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import cn from 'classnames';
 
 import { logoutUser } from '../../state/actions/userActions';
 
@@ -12,7 +13,7 @@ import { ReactComponent as LogoutIcon } from '../../assets/imgs/logout.svg';
 
 import styles from './OptionsSection.module.scss';
 
-const OptionsSection = ({ socket }) => {
+const OptionsSection = ({ socket, activeTab, setActiveTab }) => {
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -20,9 +21,27 @@ const OptionsSection = ({ socket }) => {
     <div className={styles.optionsSection}>
       <Logo className={styles.logo} />
       <div className={styles.optionButtons}>
-        <SettingsIcon className={styles.optionsIcon} />
-        <UserIcon className={styles.optionsIcon} />
-        <ChatIcon className={styles.optionsIcon} />
+        <SettingsIcon
+          className={cn(
+            styles.optionsIcon,
+            activeTab === 'settings' && styles.active
+          )}
+          onClick={() => setActiveTab('settings')}
+        />
+        <UserIcon
+          className={cn(
+            styles.optionsIcon,
+            activeTab === 'user' && styles.active
+          )}
+          onClick={() => setActiveTab('user')}
+        />
+        <ChatIcon
+          className={cn(
+            styles.optionsIcon,
+            activeTab === 'chat' && styles.active
+          )}
+          onClick={() => setActiveTab('chat')}
+        />
       </div>
       <LogoutIcon
         className={styles.optionsIcon}

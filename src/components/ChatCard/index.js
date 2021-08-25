@@ -5,7 +5,13 @@ import profilePicPlaceholder from '../../assets/imgs/profile_picture.png';
 
 import styles from './ChatCard.module.scss';
 
-const ChatCard = ({ name, profilePicture, activateChat, isActive }) => {
+const ChatCard = ({
+  name,
+  profilePicture,
+  activateChat,
+  isActive,
+  lastMessage = 'Start chatting now!',
+}) => {
   return (
     <div
       className={cn(styles.chat_card, isActive && styles.active_card)}
@@ -15,7 +21,7 @@ const ChatCard = ({ name, profilePicture, activateChat, isActive }) => {
       <img src={profilePicture || profilePicPlaceholder} alt='profile_image' />
       <div className={styles.content}>
         <h5>{name}</h5>
-        <p>Start chatting now!</p>
+        <p className={styles.lastMessage}>{lastMessage}</p>
       </div>
       <div className={styles.onlineStatus}></div>
     </div>
