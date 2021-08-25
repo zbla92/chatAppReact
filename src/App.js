@@ -1,20 +1,15 @@
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Login from './views/login';
 import Register from './views/register';
 import Main from './views/main';
 
-import styles from './app.module.scss';
-import useSocketIO from './hooks/useSocketIO';
+import PrivateRoute from './routers/PrivateRoute';
 
 function App() {
-  const socket = useSocketIO();
-
   return (
     <Router>
       <Switch>
-        <Route exact path='/'>
-          <Main socket={socket} />
-        </Route>
+        <PrivateRoute path='/' exact component={Main} />
         <Route exact path='/sign-in'>
           <Login />
         </Route>

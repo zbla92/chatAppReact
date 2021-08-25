@@ -1,18 +1,18 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 
-import { registerUser } from "../../state/actions/userActions";
+import { logoutUser, registerUser } from '../../state/actions/userActions';
 
-import { ReactComponent as Logo } from "../../assets/imgs/nasa_logo.svg";
-import styles from "./register.module.scss";
+import { ReactComponent as Logo } from '../../assets/imgs/nasa_logo.svg';
+import styles from './register.module.scss';
 
 const initialCredentials = {
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  firstName: '',
+  lastName: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
 };
 
 const Register = () => {
@@ -25,6 +25,10 @@ const Register = () => {
     dispatch(registerUser(credentials, history));
   };
 
+  useEffect(() => {
+    dispatch(logoutUser());
+  }, []);
+
   return (
     <div className={styles.register}>
       <div className={styles.wrapper}>
@@ -34,50 +38,50 @@ const Register = () => {
         <div className={styles.body}>
           <Logo className={styles.logo} />
           <div className={styles.input_wrap}>
-            <label for="firstName">First name:</label>
+            <label for='firstName'>First name:</label>
             <input
-              type="text"
-              name="firstName"
+              type='text'
+              name='firstName'
               onChange={(e) => {
                 setCredentials({ ...credentials, firstName: e.target.value });
               }}
             />
           </div>
           <div className={styles.input_wrap}>
-            <label for="lastName">Last name:</label>
+            <label for='lastName'>Last name:</label>
             <input
-              type="text"
-              name="lastName"
+              type='text'
+              name='lastName'
               onChange={(e) => {
                 setCredentials({ ...credentials, lastName: e.target.value });
               }}
             />
           </div>
           <div className={styles.input_wrap}>
-            <label for="email">Email:</label>
+            <label for='email'>Email:</label>
             <input
-              type="text"
-              name="email"
+              type='text'
+              name='email'
               onChange={(e) => {
                 setCredentials({ ...credentials, email: e.target.value });
               }}
             />
           </div>
           <div className={styles.input_wrap}>
-            <label for="password">Password:</label>
+            <label for='password'>Password:</label>
             <input
-              type="password"
-              name="password"
+              type='password'
+              name='password'
               onChange={(e) => {
                 setCredentials({ ...credentials, password: e.target.value });
               }}
             />
           </div>
           <div className={styles.input_wrap}>
-            <label for="confirmPassword">Confirm password:</label>
+            <label for='confirmPassword'>Confirm password:</label>
             <input
-              type="password"
-              name="confirmPassword"
+              type='password'
+              name='confirmPassword'
               onChange={(e) => {
                 setCredentials({
                   ...credentials,
@@ -86,9 +90,14 @@ const Register = () => {
               }}
             />
           </div>
-          <button className={styles.signin_button} onClick={onSubmit}>
-            Register
-          </button>
+          <div className={styles.bottom}>
+            <button className={styles.signin_button} onClick={onSubmit}>
+              Sign in
+            </button>
+            <div className={styles.register_link}>
+              <Link to='/sign-in'>Already a member? Sign In.</Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>

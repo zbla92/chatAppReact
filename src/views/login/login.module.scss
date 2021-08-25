@@ -70,18 +70,46 @@
   }
 }
 
-.signin_button {
-  border: none;
-  height: 40px;
-  width: 140px;
-  border-radius: 50px;
-  background-color: rgb(89, 169, 131);
-  color: white;
-}
-
 .errors {
   color: rgb(197, 65, 56);
   position: absolute;
   top: 85px;
   font-size: 12px;
+}
+
+.bottom {
+  position: absolute;
+  bottom: 24px;
+
+  .signin_button {
+    border: none;
+    height: 40px;
+    width: 140px;
+    border-radius: 50px;
+    background-color: rgb(89, 169, 131);
+    color: white;
+    opacity: 0.7;
+    transition: 0.2s;
+
+    &:hover {
+      opacity: 1;
+      cursor: pointer;
+    }
+  }
+
+  .register_link {
+    margin-top: 24px;
+    a {
+      color: white;
+      opacity: 0.3;
+      font-weight: 300;
+      font-size: 14px;
+      transition: 0.2s;
+
+      &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+      }
+    }
+  }
 }

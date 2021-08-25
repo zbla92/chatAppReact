@@ -4,6 +4,7 @@ import {
   LOGIN,
   LOGIN_FAIL,
   LOGIN_LOADING,
+  LOGOUT_USER,
   GET_USER,
   GET_USER_LOADING,
   GET_USER_FAIL,
@@ -33,6 +34,9 @@ const auth = (state = authInitialState, action) => {
         loading: false,
       };
 
+    case LOGOUT_USER:
+      return authInitialState;
+
     default:
       return state;
   }
@@ -51,6 +55,9 @@ const userData = (state = userDataInitialState, action) => {
 
     case GET_USER_FAIL:
       return { ...state, error: action.payload, loading: false };
+
+    case LOGOUT_USER:
+      return userDataInitialState;
 
     default:
       return state;
