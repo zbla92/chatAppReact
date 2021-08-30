@@ -41,12 +41,21 @@ const instance = (() => {
     return axios.delete(`${baseURL}${url}`, params);
   };
 
+  const upload = (url, params) => {
+    return axios.post(`${baseURL}${url}`, params, {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    });
+  };
+
   return {
     get,
     post,
     patch,
     put,
     del,
+    upload,
   };
 })();
 

@@ -1,4 +1,4 @@
-import Api from "./apiClient";
+import Api from './apiClient';
 
 const handleError = (error) => {
   if (error?.response) {
@@ -47,6 +47,15 @@ export const put = async (url, params = {}) => {
 export const remove = async (url, deleteData = {}) => {
   try {
     const response = await Api.del(url, deleteData);
+    return response.data;
+  } catch (error) {
+    throw error.response;
+  }
+};
+
+export const upload = async (url, postData = {}) => {
+  try {
+    const response = await Api.post(url, postData);
     return response.data;
   } catch (error) {
     throw error.response;
