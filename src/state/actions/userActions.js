@@ -13,6 +13,7 @@ import {
   signInService,
   registerService,
   getAuthenticatedUserService,
+  logoutService,
 } from '../../services/userService';
 import Cookies from 'js-cookie';
 
@@ -42,10 +43,16 @@ export const loginUser = (params) => async (dispatch) => {
   }
 };
 
-export const logoutUser = () => (dispatch) => {
-  dispatch({ type: LOGOUT_USER });
-  Cookies.remove('access_token');
-  Cookies.remove('refresh_token');
+export const logoutUser = (id) => async (dispatch) => {
+  try {
+    await logoutService(id);
+
+    dispatch({ type: LOGOUT_USER });
+    Cookies.remove('access_token');
+    Cookies.remove('refresh_token');
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const registerUser = (params, history) => async (dispatch) => {

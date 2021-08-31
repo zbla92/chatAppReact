@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
 import { logoutUser } from '../../state/actions/userActions';
@@ -14,6 +14,7 @@ import { ReactComponent as LogoutIcon } from '../../assets/imgs/logout.svg';
 import styles from './OptionsSection.module.scss';
 
 const OptionsSection = ({ socket, activeTab, setActiveTab }) => {
+  const user = useSelector((state) => state.user.userData?.data);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -47,7 +48,7 @@ const OptionsSection = ({ socket, activeTab, setActiveTab }) => {
         className={styles.optionsIcon}
         onClick={() => {
           socket.emit('end');
-          dispatch(logoutUser());
+          dispatch(logoutUser(user.id));
           history.push('/sign-in');
         }}
       />
