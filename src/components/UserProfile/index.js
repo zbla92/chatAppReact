@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import profilePicture from '../../assets/imgs/profile_picture.png';
 
 import { upload } from '../../utils/service';
 
@@ -29,7 +30,11 @@ const UserProfile = () => {
   return (
     <div className={styles.userProfile}>
       <div className={styles.top}>
-        <img className={styles.image} src={user.profilePicture} alt='profile' />
+        <img
+          className={styles.image}
+          src={user.profilePicture || profilePicture}
+          alt='profile'
+        />
         <label className={styles.image_upload_button} for='avatar'>
           <UploadIcon className={styles.upload_svg} />
           <input

@@ -1,13 +1,14 @@
 import React from 'react';
 
 import styles from './UserInfo.module.scss';
+import placeholderUser from '../../../../assets/imgs/profile_picture.png';
 
 const UserInfo = ({ name, profilePicture, onlineStatus = 'Online' }) => {
   return (
     <div className={styles.user_info}>
       <img
         className={styles.profile_image}
-        src={profilePicture}
+        src={profilePicture || placeholderUser}
         alt='profile'
       />
       <div className={styles.user_content}>
