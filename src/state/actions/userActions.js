@@ -38,7 +38,7 @@ export const loginUser = (params) => async (dispatch) => {
 
     dispatch(getUser());
   } catch (error) {
-    dispatch({ type: LOGIN_FAIL, payload: error.data });
+    dispatch({ type: LOGIN_FAIL, payload: error });
     console.log('[ERROR][LOGIN_FAIL]: ', error);
   }
 };
