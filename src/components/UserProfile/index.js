@@ -11,7 +11,7 @@ import styles from './UserProfile.module.scss';
 const UserProfile = () => {
   const [image, setImage] = useState(null);
 
-  const user = useSelector((state) => state.user.userData?.data);
+  const user = useSelector((state) => state.auth.user?.data);
 
   const submitForm = () => {
     const url = '/user/avatar';

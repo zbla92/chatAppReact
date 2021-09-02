@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
-import { logoutUser, registerUser } from '../../state/actions/userActions';
+import { logoutUser, registerUser } from '../../state/actions/authActions';
 
 import { ReactComponent as Logo } from '../../assets/imgs/nasa_logo.svg';
 import styles from './register.module.scss';

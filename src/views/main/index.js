@@ -14,7 +14,7 @@ import styles from './Main.module.scss';
 const Main = () => {
   const [activeChat, setActiveChat] = useState(null);
   const [activeTab, setActiveTab] = useState('chat');
-  const isLoggedIn = useSelector((state) => !!state.user.userData?.data?.id);
+  const isLoggedIn = useSelector((state) => !!state.auth.user?.data?.id);
 
   const history = useHistory();
 

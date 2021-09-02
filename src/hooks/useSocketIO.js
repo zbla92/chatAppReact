@@ -11,7 +11,7 @@ import {
 const useSocketIO = () => {
   const [socket, setSocket] = useState(null);
 
-  const user = useSelector((state) => state.user?.userData?.data);
+  const user = useSelector((state) => state.auth?.user?.data);
 
   const dispatch = useDispatch();
 

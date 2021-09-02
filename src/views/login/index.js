@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-import { getUser, loginUser } from '../../state/actions/userActions';
+import { getUser, loginUser } from '../../state/actions/authActions';
 
 import { ReactComponent as Logo } from '../../assets/imgs/nasa_logo.svg';
 import styles from './login.module.scss';
@@ -12,8 +12,8 @@ const initialCredentials = { email: '', password: '' };
 
 const Login = () => {
   const [credentials, setCredentials] = useState(initialCredentials);
-  const { error } = useSelector((state) => state.user.auth);
-  const isLoggedIn = useSelector((state) => state.user.userData?.data?.id);
+  const { error } = useSelector((state) => state.auth.tokens);
+  const isLoggedIn = useSelector((state) => state.auth.user?.data?.id);
 
   const accessToken = Cookies.get('access_token');
 

@@ -3,7 +3,7 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
-import { logoutUser } from '../../state/actions/userActions';
+import { logoutUser } from '../../state/actions/authActions';
 
 import { ReactComponent as Logo } from '../../assets/imgs/nasa_logo.svg';
 import { ReactComponent as SettingsIcon } from '../../assets/imgs/settings.svg';
@@ -14,7 +14,7 @@ import { ReactComponent as LogoutIcon } from '../../assets/imgs/logout.svg';
 import styles from './OptionsSection.module.scss';
 
 const OptionsSection = ({ socket, activeTab, setActiveTab }) => {
-  const user = useSelector((state) => state.user.userData?.data);
+  const user = useSelector((state) => state.auth.user?.data);
   const dispatch = useDispatch();
 
   return (
