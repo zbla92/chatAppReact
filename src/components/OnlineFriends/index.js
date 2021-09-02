@@ -9,6 +9,8 @@ const OnlineFriends = ({ setActiveChat, activeChat }) => {
   const { online, chats } = useSelector((state) => state?.friends);
   const user = useSelector((state) => state.user?.userData?.data);
 
+  if (!user) return null;
+
   return (
     <div className={styles.onlineFriends}>
       <h4>Online friends:</h4>

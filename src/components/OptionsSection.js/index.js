@@ -1,5 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+
 import { useDispatch, useSelector } from 'react-redux';
 import cn from 'classnames';
 
@@ -16,7 +16,6 @@ import styles from './OptionsSection.module.scss';
 const OptionsSection = ({ socket, activeTab, setActiveTab }) => {
   const user = useSelector((state) => state.user.userData?.data);
   const dispatch = useDispatch();
-  const history = useHistory();
 
   return (
     <div className={styles.optionsSection}>
@@ -47,9 +46,7 @@ const OptionsSection = ({ socket, activeTab, setActiveTab }) => {
       <LogoutIcon
         className={styles.optionsIcon}
         onClick={() => {
-          socket.emit('end');
           dispatch(logoutUser(user.id));
-          history.push('/sign-in');
         }}
       />
     </div>
