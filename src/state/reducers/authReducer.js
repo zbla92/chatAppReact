@@ -12,7 +12,7 @@ import {
 
 const authInitialState = { error: null, data: null, loading: false };
 
-const auth = (state = authInitialState, action) => {
+const tokens = (state = authInitialState, action) => {
   switch (action.type) {
     case LOGIN:
       return {
@@ -44,7 +44,7 @@ const auth = (state = authInitialState, action) => {
 
 const userDataInitialState = { error: null, data: null, loading: false };
 
-const userData = (state = userDataInitialState, action) => {
+const user = (state = userDataInitialState, action) => {
   switch (action.type) {
     case GET_USER:
       return { ...state, data: action.payload, loading: false };
@@ -64,4 +64,4 @@ const userData = (state = userDataInitialState, action) => {
   }
 };
 
-export default combineReducers({ auth, userData });
+export default combineReducers({ tokens, user });

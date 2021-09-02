@@ -16,7 +16,7 @@ import UserInfo from './components/UserInfo';
 const Chat = ({ activeChat, socket }) => {
   const [message, setMessage] = useState('');
 
-  const user = useSelector((state) => state.user.userData?.data);
+  const user = useSelector((state) => state.auth.user?.data);
   const currentChat = useSelector(
     (state) => state.friends.chats[activeChat?.userId]
   );

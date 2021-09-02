@@ -7,7 +7,7 @@ import styles from './OnlineFriends.module.scss';
 
 const OnlineFriends = ({ setActiveChat, activeChat }) => {
   const { online, chats } = useSelector((state) => state?.friends);
-  const user = useSelector((state) => state.user?.userData?.data);
+  const user = useSelector((state) => state.auth?.user?.data);
 
   if (!user) return null;
 
