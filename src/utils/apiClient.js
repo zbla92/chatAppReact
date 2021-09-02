@@ -24,13 +24,13 @@ axios.interceptors.response.use(
   async (err) => {
     const originalConfig = err.config;
 
-    if (originalConfig.url !== `${baseURL}/user/auth` && err.response) {
+    if (originalConfig.url !== `${baseURL}/auth/user` && err.response) {
       // Access Token was expried
       if (err.response.status === 401 && !originalConfig._retry) {
         originalConfig._retry = true;
 
         try {
-          const rs = await axios.post(`${baseURL}/user/auth/refresh`, {
+          const rs = await axios.post(`${baseURL}/auth/refresh`, {
             refreshToken: Cookies.get('refresh_token'),
           });
 

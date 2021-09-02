@@ -54,6 +54,11 @@ const useSocketIO = () => {
 
       socket.on('direct_message', (data) => dispatch(receivedNewMessage(data)));
     }
+
+    return () => {
+      // Let the server know to destroy this connection as I'm  out
+      socket?.emit('end');
+    };
   }, [user, socket]);
 
   return socket;
