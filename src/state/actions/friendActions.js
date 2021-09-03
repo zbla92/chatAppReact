@@ -1,4 +1,7 @@
+import { getAllFriendsService } from '../../services/friendService';
 import {
+  GET_ALL_FRIENDS,
+  GET_ALL_FRIENDS_FAIL,
   GET_ONLINE_FRIENDS,
   RECEIVED_NEW_MESSAGE,
   SENT_NEW_MESSAGE,
@@ -17,4 +20,13 @@ export const receivedNewMessage = (data) => (dispatch) => {
 
 export const sentNewMessage = (data) => (dispatch) => {
   dispatch({ type: SENT_NEW_MESSAGE, payload: data });
+};
+
+export const getAllFriends = () => async (dispatch) => {
+  try {
+    const response = await getAllFriendsService();
+    dispatch({ type: GET_ALL_FRIENDS, paylaod: response });
+  } catch (err) {
+    dispatch({ type: GET_ALL_FRIENDS_FAIL });
+  }
 };
