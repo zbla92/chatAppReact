@@ -26,12 +26,12 @@ const Chat = ({ activeChat, socket }) => {
   const sendMessage = () => {
     if (message.length < 1) return;
     socket.emit('direct_message', {
-      toUserId: activeChat.userId,
+      toUserId: activeChat.id,
       fromUserId: user.id,
       message,
     });
 
-    dispatch(sentNewMessage({ from: 'me', to: activeChat.userId, message }));
+    dispatch(sentNewMessage({ from: 'me', to: activeChat.id, message }));
     // Window onkeydown will send the enter after the setMessage is completed leaving one enter in the textarea after completion
     setTimeout(() => setMessage(''), 1);
   };

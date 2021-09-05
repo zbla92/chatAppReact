@@ -5,17 +5,30 @@ import {
   GET_ONLINE_FRIENDS,
   RECEIVED_NEW_MESSAGE,
   SENT_NEW_MESSAGE,
+  GET_ALL_FRIENDS,
+  GET_ALL_FRIENDS_FAIL,
+  GET_ALL_FRIENDS_LOADING,
 } from '../constants';
+import { convertArrayToObject } from '../../utils/helpers';
 
-const onlineInitialState = [];
+const onlineInitialState = {};
 
 const online = (state = onlineInitialState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case GET_ONLINE_FRIENDS:
-      console.log(payload);
-      return payload;
+    case GET_ALL_FRIENDS: {
+      const arrayOfFriends = convertArrayToObject(payload, 'id');
+
+      return arrayOfFriends;
+    }
+
+    case GET_ONLINE_FRIENDS: {
+      Object.keys(state).map((id) => (state[id].online = false));
+      payload.map((user) => (state[user.userId].online = true));
+
+      return state;
+    }
 
     default:
       return state;

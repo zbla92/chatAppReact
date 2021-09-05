@@ -25,8 +25,9 @@ export const sentNewMessage = (data) => (dispatch) => {
 export const getAllFriends = () => async (dispatch) => {
   try {
     const response = await getAllFriendsService();
-    dispatch({ type: GET_ALL_FRIENDS, paylaod: response });
+    dispatch({ type: GET_ALL_FRIENDS, payload: response.data });
   } catch (err) {
+    console.log('[ERROR][FRIEND] -- ', err);
     dispatch({ type: GET_ALL_FRIENDS_FAIL });
   }
 };
