@@ -18,7 +18,7 @@ const OnlineFriends = ({ setActiveChat, activeChat }) => {
 
   useEffect(() => {
     if (user) {
-      dispatch(getAllFriends());
+      dispatch(getAllFriends(user.id));
     }
   }, [user]);
 
@@ -30,6 +30,7 @@ const OnlineFriends = ({ setActiveChat, activeChat }) => {
       <div className={styles.onlineFriends_container}>
         {online?.map((friend) => (
           <ChatCard
+            key={friend.id}
             name={`${friend.firstName} ${friend.lastName}`}
             profilePicture={friend.profilePicture}
             activateChat={() => setActiveChat(friend)}

@@ -9,7 +9,7 @@ import {
   GET_ALL_FRIENDS_FAIL,
   GET_ALL_FRIENDS_LOADING,
 } from '../constants';
-import { convertArrayToObject } from '../../utils/helpers';
+import { mergeDeep } from '../../utils/helpers';
 
 const onlineInitialState = {};
 
@@ -18,16 +18,11 @@ const online = (state = onlineInitialState, action) => {
 
   switch (type) {
     case GET_ALL_FRIENDS: {
-      const arrayOfFriends = convertArrayToObject(payload, 'id');
-
-      return arrayOfFriends;
+      return payload;
     }
 
     case GET_ONLINE_FRIENDS: {
-      Object.keys(state).map((id) => (state[id].online = false));
-      payload.map((user) => (state[user.userId].online = true));
-
-      return state;
+      return mergeDeep(payload, state);
     }
 
     default:
