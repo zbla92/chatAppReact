@@ -7,21 +7,21 @@ import { getUser, loginUser } from '../../state/actions/authActions';
 
 import { ReactComponent as Logo } from '../../assets/imgs/nasa_logo.svg';
 import styles from './login.module.scss';
-
-const initialCredentials = { email: '', password: '' };
+import { useForm } from 'react-hook-form';
 
 const Login = () => {
-  const [credentials, setCredentials] = useState(initialCredentials);
   const { error } = useSelector((state) => state.auth.tokens);
   const isLoggedIn = useSelector((state) => state.auth.user?.data?.id);
 
   const accessToken = Cookies.get('access_token');
 
+  const { register, handleSubmit } = useForm();
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onSignIn = () => {
-    dispatch(loginUser(credentials, history));
+  const onSubmit = (data) => {
+    console.log('desava l se ovo');
+    dispatch(loginUser(data, history));
   };
 
   useEffect(() => {
@@ -39,36 +39,32 @@ const Login = () => {
           <h2>Sign In</h2>
         </div>
         <div className={styles.body}>
-          <Logo className={styles.logo} />
-          {error?.error && <p className={styles.errors}>{error.error}</p>}
-          <div className={styles.input_wrap}>
-            <label for='email'>Email:</label>
-            <input
-              type='text'
-              name='email'
-              onChange={(e) => {
-                setCredentials({ ...credentials, email: e.target.value });
-              }}
-            />
-          </div>
-          <div className={styles.input_wrap}>
-            <label for='password'>Password:</label>
-            <input
-              type='password'
-              name='password'
-              onChange={(e) => {
-                setCredentials({ ...credentials, password: e.target.value });
-              }}
-            />
-          </div>
-          <div className={styles.bottom}>
-            <button className={styles.signin_button} onClick={onSignIn}>
-              Sign in
-            </button>
-            <div className={styles.register_link}>
-              <Link to='/register'>Create new account.</Link>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <Logo className={styles.logo} />
+            {error?.data && (
+              <p className={styles.errors}>{error?.data?.error}</p>
+            )}
+            <div className={styles.input_wrap}>
+              <label for='email'>Email:</label>
+              <input type='text' name='email' {...register('email')} />
             </div>
-          </div>
+            <div className={styles.input_wrap}>
+              <label for='password'>Password:</label>
+              <input
+                type='password'
+                name='password'
+                {...register('password')}
+              />
+            </div>
+            <div className={styles.bottom}>
+              <button className={styles.signin_button} type='submit'>
+                Sign in
+              </button>
+              <div className={styles.register_link}>
+                <Link to='/register'>Create new account.</Link>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>
