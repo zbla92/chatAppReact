@@ -8,6 +8,8 @@ import {
   GET_ALL_FRIENDS,
   GET_ALL_FRIENDS_FAIL,
   GET_ALL_FRIENDS_LOADING,
+  FRIEND_CONNECTED,
+  FRIEND_DISCONNECTED,
 } from '../constants';
 import { mergeDeep } from '../../utils/helpers';
 
@@ -23,6 +25,16 @@ const online = (state = onlineInitialState, action) => {
 
     case GET_ONLINE_FRIENDS: {
       return mergeDeep(payload, state);
+    }
+
+    case FRIEND_CONNECTED: {
+      state[payload.userId].online = true;
+      return state;
+    }
+
+    case FRIEND_DISCONNECTED: {
+      state[payload.userId].online = false;
+      return state;
     }
 
     default:

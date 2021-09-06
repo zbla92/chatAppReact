@@ -6,6 +6,8 @@ import io from 'socket.io-client';
 import {
   getOnlineFriends,
   receivedNewMessage,
+  friendConnected,
+  friendDisconnected,
 } from '../state/actions/friendActions';
 
 const useSocketIO = () => {
@@ -53,6 +55,10 @@ const useSocketIO = () => {
       });
 
       socket.on('direct_message', (data) => dispatch(receivedNewMessage(data)));
+      socket.on('friend_connected', (data) => dispatch(friendConnected(data)));
+      socket.on('friend_disconnected', (data) =>
+        dispatch(friendDisconnected(data))
+      );
     }
 
     return () => {

@@ -33,11 +33,11 @@ const OnlineFriends = ({ setActiveChat, activeChat }) => {
             key={friend.id}
             name={`${friend.firstName} ${friend.lastName}`}
             profilePicture={friend.profilePicture}
-            activateChat={() => setActiveChat(friend)}
+            // friend.online check will be removed once we have support to send messages to online users
+            activateChat={() => (friend.online ? setActiveChat(friend) : null)}
             isActive={activeChat?.id == friend?.id}
             lastMessage={
-              chats[friend?.userId]?.[chats[friend?.userId]?.length - 1]
-                ?.message
+              chats[friend?.id]?.[chats[friend?.id]?.length - 1]?.message
             }
             isOnline={friend.online}
           />

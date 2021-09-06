@@ -18,7 +18,7 @@ const Chat = ({ activeChat, socket }) => {
 
   const user = useSelector((state) => state.auth.user?.data);
   const currentChat = useSelector(
-    (state) => state.friends.chats[activeChat?.userId]
+    (state) => state.friends.chats[activeChat?.id]
   );
 
   const dispatch = useDispatch();
