@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { Link, useHistory } from 'react-router-dom';
 
 import { logoutUser, registerUser } from '../../state/actions/authActions';
 
 import { ReactComponent as Logo } from '../../assets/imgs/nasa_logo.svg';
 import styles from './register.module.scss';
+import { VALIDATOR } from '../../utils/validation';
 
 const initialCredentials = {
   firstName: '',
@@ -16,18 +18,24 @@ const initialCredentials = {
 };
 
 const Register = () => {
-  const [credentials, setCredentials] = useState(initialCredentials);
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const onSubmit = () => {
-    dispatch(registerUser(credentials, history));
+  const onSubmit = (data) => {
+    if (data?.firstName) dispatch(registerUser(data, history));
   };
 
   useEffect(() => {
     dispatch(logoutUser());
   }, []);
+
+  const errorDisplay = (name) =>
+    errors[name] && <p className={styles.error}>{errors[name].message}</p>;
 
   return (
     <div className={styles.register}>
@@ -37,67 +45,80 @@ const Register = () => {
         </div>
         <div className={styles.body}>
           <Logo className={styles.logo} />
-          <div className={styles.input_wrap}>
-            <label for='firstName'>First name:</label>
-            <input
-              type='text'
-              name='firstName'
-              onChange={(e) => {
-                setCredentials({ ...credentials, firstName: e.target.value });
-              }}
-            />
-          </div>
-          <div className={styles.input_wrap}>
-            <label for='lastName'>Last name:</label>
-            <input
-              type='text'
-              name='lastName'
-              onChange={(e) => {
-                setCredentials({ ...credentials, lastName: e.target.value });
-              }}
-            />
-          </div>
-          <div className={styles.input_wrap}>
-            <label for='email'>Email:</label>
-            <input
-              type='text'
-              name='email'
-              onChange={(e) => {
-                setCredentials({ ...credentials, email: e.target.value });
-              }}
-            />
-          </div>
-          <div className={styles.input_wrap}>
-            <label for='password'>Password:</label>
-            <input
-              type='password'
-              name='password'
-              onChange={(e) => {
-                setCredentials({ ...credentials, password: e.target.value });
-              }}
-            />
-          </div>
-          <div className={styles.input_wrap}>
-            <label for='confirmPassword'>Confirm password:</label>
-            <input
-              type='password'
-              name='confirmPassword'
-              onChange={(e) => {
-                setCredentials({
-                  ...credentials,
-                  confirmPassword: e.target.value,
-                });
-              }}
-            />
-          </div>
-          <div className={styles.bottom}>
-            <button className={styles.signin_button} onClick={onSubmit}>
-              Sign in
-            </button>
-            <div className={styles.register_link}>
-              <Link to='/sign-in'>Already a member? Sign In.</Link>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className={styles.input_wrap}>
+              <label htmlFor='firstName'>First name:</label>
+              <input
+                type='text'
+                name='firstName'
+                {...register('firstName', {
+                  required: VALIDATOR.REQUIRED,
+                  minLength: VALIDATOR.MIN_NUMBER_OF_CHAR,
+                  maxLength: VALIDATOR.MAX_NUMBER_OF_CHAR,
+                })}
+              />
+              {errorDisplay('firstName')}
             </div>
-          </div>
+            <div className={styles.input_wrap}>
+              <label htmlFor='lastName'>Last name:</label>
+              <input
+                type='text'
+                name='lastName'
+                {...register('lastName', {
+                  required: VALIDATOR.REQUIRED,
+                  minLength: VALIDATOR.MIN_NUMBER_OF_CHAR,
+                  maxLength: VALIDATOR.MAX_NUMBER_OF_CHAR,
+                })}
+              />
+              {errorDisplay('lastName')}
+            </div>
+            <div className={styles.input_wrap}>
+              <label htmlFor='email'>Email:</label>
+              <input
+                type='text'
+                name='email'
+                {...register('email', {
+                  required: VALIDATOR.REQUIRED,
+                  pattern: VALIDATOR.VALID_EMAIL,
+                })}
+              />
+              {errorDisplay('email')}
+            </div>
+            <div className={styles.input_wrap}>
+              <label htmlFor='password'>Password:</label>
+              <input
+                type='password'
+                name='password'
+                {...register('password', {
+                  required: VALIDATOR.REQUIRED,
+                  minLength: VALIDATOR.PASSWORD_MIN_LENGTH,
+                  maxLength: VALIDATOR.MAX_NUMBER_OF_CHAR,
+                })}
+              />
+              {errorDisplay('password')}
+            </div>
+            <div className={styles.input_wrap}>
+              <label htmlFor='confirmPassword'>Confirm password:</label>
+              <input
+                type='password'
+                name='confirmPassword'
+                {...register('confirmPassword', {
+                  required: VALIDATOR.REQUIRED,
+                  minLength: VALIDATOR.PASSWORD_MIN_LENGTH,
+                  maxLength: VALIDATOR.MAX_NUMBER_OF_CHAR,
+                })}
+              />
+              {errorDisplay('confirmPassword')}
+            </div>
+            <div className={styles.bottom}>
+              <button className={styles.signin_button} onClick={onSubmit}>
+                Sign in
+              </button>
+              <div className={styles.register_link}>
+                <Link to='/sign-in'>Already a member? Sign In.</Link>
+              </div>
+            </div>
+          </form>
         </div>
       </div>
     </div>

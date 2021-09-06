@@ -5,6 +5,11 @@
   border-right: 1px solid #31344b;
   position: relative;
 
+  .scroll {
+    overflow-y: scroll;
+    height: calc(90vh - 186px);
+  }
+
   h4 {
     text-align: center;
     color: white;
