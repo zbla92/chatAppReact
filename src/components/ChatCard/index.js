@@ -11,6 +11,7 @@ const ChatCard = ({
   activateChat,
   isActive,
   lastMessage = 'Start chatting now!',
+  isOnline,
 }) => {
   return (
     <div
@@ -23,7 +24,9 @@ const ChatCard = ({
         <h5>{name}</h5>
         <p className={styles.lastMessage}>{lastMessage}</p>
       </div>
-      <div className={styles.onlineStatus}></div>
+      <div>
+        <div className={cn(styles.onlineStatus, isOnline && styles.online)} />
+      </div>
     </div>
   );
 };

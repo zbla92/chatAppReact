@@ -49,3 +49,15 @@
 .active_card {
   background-color: $primary_color;
 }
+
+.onlineStatus {
+  border-radius: 50%;
+  background-color: $red_primary;
+  height: 8px;
+  width: 8px;
+  margin: 0 12px;
+}
+
+.online {
+  background-color: $green_primary;
+}

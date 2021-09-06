@@ -14,7 +14,7 @@ import {
   registerService,
   getAuthenticatedUserService,
   logoutService,
-} from '../../services/userService';
+} from '../../services/authService';
 import Cookies from 'js-cookie';
 
 export const getUser = () => async (dispatch) => {
