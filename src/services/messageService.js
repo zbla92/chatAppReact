@@ -1,3 +1,3 @@
 import { get, post, put, remove } from '../utils/service';
 
-export const getMessages = (params) => get('/messages', params);
+export const getMessagesService = (params) => get('/messages', params);
