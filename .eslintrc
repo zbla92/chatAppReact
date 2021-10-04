@@ -5,7 +5,7 @@
 	},
 	"parser": "babel-eslint",
 	"plugins": ["prettier", "jest", "cypress"],
-	"extends": ["airbnb", "prettier", "prettier/react", "plugin:cypress/recommended"],
+	"extends": ["airbnb", "prettier", "plugin:cypress/recommended"],
 	"rules": {
 		"camelcase": 0,
 		"prettier/prettier": ["error"],

@@ -5,7 +5,7 @@ import friends from './friendReducer';
 import message from './messageReducer';
 
 export default combineReducers({
-  auth,
-  friends,
-  message,
+	auth,
+	friends,
+	message
 });
