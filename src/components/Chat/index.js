@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable eqeqeq */
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { sentNewMessage } from '../../state/actions/friendActions';
@@ -12,6 +13,7 @@ import Message from '../Message';
 
 import styles from './Chat.module.scss';
 import UserInfo from './components/UserInfo';
+import { getMessages } from '../../state/actions/messageActions';
 
 const Chat = ({ activeChat, socket }) => {
 	const [message, setMessage] = useState('');
@@ -24,12 +26,12 @@ const Chat = ({ activeChat, socket }) => {
 	const sendMessage = () => {
 		if (message.length < 1) return;
 		socket.emit('direct_message', {
-			toUserId: activeChat.id,
-			fromUserId: user.id,
+			recipientId: activeChat.id,
+			senderId: user.id,
 			message
 		});
 
-		dispatch(sentNewMessage({ from: 'me', to: activeChat.id, message }));
+		dispatch(sentNewMessage({ senderId: user.id, recipientId: activeChat.id, message, read: null, sent: null, time: new Date() }));
 		// Window onkeydown will send the enter after the setMessage is completed leaving one enter in the textarea after completion
 		setTimeout(() => setMessage(''), 1);
 	};
@@ -37,6 +39,10 @@ const Chat = ({ activeChat, socket }) => {
 	window.onkeydown = e => {
 		if (e.keyCode === 13) sendMessage();
 	};
+
+	useEffect(() => {
+		if (user?.id && activeChat?.id) dispatch(getMessages({ page: 1, recipientId: activeChat.id, senderId: user.id }));
+	}, [activeChat, user]);
 
 	return (
 		<div className={styles.chat}>
@@ -49,7 +55,7 @@ const Chat = ({ activeChat, socket }) => {
 					<div className={styles.content}>
 						<div className={styles.scroll}>
 							{currentChat?.map(msg => (
-								<Message message={msg} isMine={msg.from === 'me'} />
+								<Message message={msg} isMine={msg.senderId == user.id} />
 							))}
 						</div>
 					</div>

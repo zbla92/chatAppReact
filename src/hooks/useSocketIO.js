@@ -42,7 +42,7 @@ const useSocketIO = () => {
 			});
 
 			socket.on('disconnect', () => {
-				console.log(socket.id, 'se diskonektovao');
+				console.log('[SOCKET] disconnected');
 			});
 
 			socket.on('error', err => {
@@ -56,6 +56,7 @@ const useSocketIO = () => {
 
 		return () => {
 			// Let the server know to destroy this connection as I'm  out
+			// eslint-disable-next-line no-unused-expressions
 			socket?.emit('end');
 		};
 	}, [user, socket]);
