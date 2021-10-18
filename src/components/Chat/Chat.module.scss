@@ -133,3 +133,20 @@
 		}
 	}
 }
+
+.loaderContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+
+.loader {
+	max-height: 35px;
+	max-width: 35px;
+}
+
+.completeChatHistoryLoaded {
+	color: rgba(255, 255, 255, 0.384);
+	font-size: 12px;
+}

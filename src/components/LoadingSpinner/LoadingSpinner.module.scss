@@ -1,0 +1,43 @@
+.container {
+	position: absolute;
+}
+
+.loader_small {
+	width: 3.2rem;
+	height: 3.2rem;
+}
+
+.loader_big {
+	width: 6.4rem;
+	height: 6.4rem;
+}
+
+.spinner::before {
+	content: '';
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	position: absolute;
+	border-radius: 50%;
+	border-right: 0.2rem solid transparent;
+	animation: loading 0.8s linear infinite;
+}
+
+.silver::before {
+	border-top: 0.2rem solid silver;
+}
+
+.gray::before {
+	border-top: 0.2rem solid gray;
+}
+
+.black::before {
+	border-top: 0.2rem solid black;
+}
+
+@keyframes loading {
+	to {
+		transform: rotate(360deg);
+	}
+}

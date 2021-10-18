@@ -16,8 +16,9 @@ export default function useChat({ activeChat, user }) {
 	const getMoreNotifications = () => {
 		if (messages.length && currentChat?.currentPage < currentChat?.maxPage) {
 			dispatch(getMessages({ page: currentChat.currentPage + 1, recipientId: activeChat.id, senderId: user.id }));
-			console.log('Load More Messages motherfucker');
-		} else setLoaded(true);
+		} else if (messages.length && currentChat?.currentPage >= currentChat?.maxPage) {
+			setLoaded(true);
+		}
 	};
 
 	useEffect(() => {
@@ -38,7 +39,7 @@ export default function useChat({ activeChat, user }) {
 		const options = {
 			root: null, // window by default
 			rootMargin: '0px',
-			threshold: 0.25
+			threshold: 0
 		};
 
 		// Create observer
@@ -52,6 +53,8 @@ export default function useChat({ activeChat, user }) {
 		// clean up on willUnMount
 		return () => observer.unobserve(loader.current);
 	}, [loader, loadMore]);
+
+	console.log(loaded, '§LOADED');
 
 	return { messages, loader, loaded };
 }
