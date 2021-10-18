@@ -4,8 +4,10 @@ import styles from './LoadingSpinner.module.scss';
 
 export default function LoadingSpinner({ variant, loaderSize, className }) {
 	return (
-		<div className={cn(styles.container, styles[loaderSize], className)}>
-			<div className={cn(styles.spinner, styles[variant])} />
+		<div className={styles.masterContainer}>
+			<div className={cn(styles.container, styles[loaderSize], className)}>
+				<div className={cn(styles.spinner, styles[variant])} />
+			</div>
 		</div>
 	);
 }

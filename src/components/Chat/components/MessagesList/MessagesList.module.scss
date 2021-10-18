@@ -1,0 +1,23 @@
+.content {
+	height: 88%;
+	overflow-y: scroll;
+	display: flex;
+	flex-direction: column-reverse;
+
+	.scroll {
+		position: relative;
+	}
+}
+
+.observedLoader {
+	margin-top: 200px;
+	position: absolute;
+	top: 0;
+}
+
+.completeChatHistoryLoaded {
+	color: rgba(255, 255, 255, 0.384);
+	font-size: 12px;
+	width: 100%;
+	text-align: center;
+}

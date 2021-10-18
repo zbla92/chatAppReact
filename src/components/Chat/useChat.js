@@ -22,7 +22,7 @@ export default function useChat({ activeChat, user }) {
 	};
 
 	useEffect(() => {
-		if (user?.id && activeChat?.id) dispatch(getMessages({ page: 1, recipientId: activeChat.id, senderId: user.id }));
+		if (user?.id && activeChat?.id && !currentChat?.maxPage) dispatch(getMessages({ page: 1, recipientId: activeChat.id, senderId: user.id }));
 	}, [activeChat, user]);
 
 	// Create ref to attach to the loader component
@@ -46,15 +46,13 @@ export default function useChat({ activeChat, user }) {
 		const observer = new IntersectionObserver(loadMore, options);
 
 		// observer the loader
-		if (loader && loader.current) {
+		if (loader?.current) {
 			observer.observe(loader.current);
 		}
 
-		// clean up on willUnMount
-		return () => observer.unobserve(loader.current);
+		// Stp observing any node with this observer instance
+		return () => observer.disconnect();
 	}, [loader, loadMore]);
-
-	console.log(loaded, '§LOADED');
 
 	return { messages, loader, loaded };
 }

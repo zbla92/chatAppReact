@@ -1,15 +1,19 @@
+.masterContainer {
+	position: relative;
+	min-height: 50px;
+	min-width: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .container {
 	position: absolute;
 }
 
 .loader_small {
-	width: 3.2rem;
-	height: 3.2rem;
-}
-
-.loader_big {
-	width: 6.4rem;
-	height: 6.4rem;
+	width: 32px;
+	height: 32px;
 }
 
 .spinner::before {

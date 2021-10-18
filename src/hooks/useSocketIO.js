@@ -37,7 +37,6 @@ const useSocketIO = () => {
 			});
 
 			socket.on('online_friends', args => {
-				console.log(args, 'STIZU');
 				dispatch(getOnlineFriends(args.friends, user.email));
 			});
 

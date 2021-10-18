@@ -20,7 +20,6 @@ const Login = () => {
 	const history = useHistory();
 
 	const onSubmit = data => {
-		console.log('desava l se ovo');
 		dispatch(loginUser(data, history));
 	};
 

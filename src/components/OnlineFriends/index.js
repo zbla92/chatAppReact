@@ -12,8 +12,6 @@ const OnlineFriends = ({ setActiveChat, activeChat }) => {
 
 	const user = useSelector(state => state.auth?.user.data);
 
-	console.log(online);
-
 	const dispatch = useDispatch();
 
 	useEffect(() => {
