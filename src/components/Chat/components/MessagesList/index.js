@@ -26,7 +26,7 @@ const MessagesList = ({ activeChat, user }) => {
 				<div ref={loader} className={styles.observedLoader} />
 				{messages?.map(msg => (
 					// eslint-disable-next-line eqeqeq
-					<Message message={msg} isMine={msg.senderId == user.id} key={msg.time} />
+					<Message message={msg} isMine={msg.senderId == user.id} key={msg.id} />
 				))}
 			</div>
 		</div>

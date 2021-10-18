@@ -11,18 +11,19 @@ export const sentNewMessage = data => dispatch => {
 };
 
 export const getMessages =
-	({ page, recipientId, senderId }) =>
+	({ page, recipientId, senderId, messagesOffset: messagesOffsetParam }) =>
 	async dispatch => {
 		try {
 			dispatch({ type: GET_MESSAGES_LOADING });
 			const response = await getMessagesService({
 				page,
 				recipientId,
-				senderId
+				senderId,
+				messagesOffset: messagesOffsetParam
 			});
 
-			const { maxPage, count, messages, currentPage } = response;
-			dispatch({ type: GET_MESSAGES_SUCCESS, payload: { maxPage, count, messages, currentPage, recipientId } });
+			const { maxPage, count, messages, currentPage, messagesOffset } = response;
+			dispatch({ type: GET_MESSAGES_SUCCESS, payload: { maxPage, count, messages, currentPage, messagesOffset, recipientId } });
 		} catch (error) {
 			console.log(error);
 			dispatch({ type: GET_MESSAGES_FAIL });

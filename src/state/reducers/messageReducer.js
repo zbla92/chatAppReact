@@ -14,9 +14,12 @@ const chats = (state = chatsInitialState, action) => {
 			let nextState = state;
 
 			nextState = produce(state, draft => {
-				if (state[payload.senderId]) {
-					draft[payload.senderId].messages = [...state[payload.senderId].messages, payload];
-				} else draft[payload.senderId] = { messages: [payload] };
+				const { senderId } = payload;
+
+				if (state[senderId]) {
+					draft[senderId].messages.push(payload);
+					draft[senderId].messagesOffset += 1;
+				} else draft[senderId] = { messages: [payload], messagesOffset: 1 };
 			});
 
 			return nextState;
@@ -25,19 +28,21 @@ const chats = (state = chatsInitialState, action) => {
 			let nextState = state;
 
 			nextState = produce(state, draft => {
-				if (state[payload.recipientId]?.messages) {
-					draft[payload.recipientId].messages = [...state[payload.recipientId].messages, payload];
-				} else draft[payload.recipientId] = { messages: [payload] };
+				const { recipientId } = payload;
+				if (state[recipientId]?.messages) {
+					draft[recipientId].messages.push(payload);
+					draft[recipientId].messagesOffset += 1;
+				} else draft[recipientId] = { messages: [payload], messagesOffset: 1 };
 			});
 
 			return nextState;
 		}
 		case GET_MESSAGES_SUCCESS: {
-			const { maxPage, count, messages, recipientId, currentPage } = payload;
+			const { maxPage, count, messages, recipientId, messagesOffset, currentPage } = payload;
 			const newState = { ...state };
 			if (state[recipientId]?.messages) {
-				newState[recipientId] = { messages: [...messages, ...state[recipientId].messages], count, maxPage, currentPage };
-			} else newState[recipientId] = { messages, count, maxPage, currentPage };
+				newState[recipientId] = { messages: [...messages, ...state[recipientId].messages], count, maxPage, currentPage, messagesOffset };
+			} else newState[recipientId] = { messages, count, maxPage, currentPage, messagesOffset };
 
 			return newState;
 		}

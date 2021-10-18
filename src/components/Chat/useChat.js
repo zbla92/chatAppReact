@@ -15,7 +15,9 @@ export default function useChat({ activeChat, user }) {
 
 	const getMoreNotifications = () => {
 		if (messages.length && currentChat?.currentPage < currentChat?.maxPage) {
-			dispatch(getMessages({ page: currentChat.currentPage + 1, recipientId: activeChat.id, senderId: user.id }));
+			dispatch(
+				getMessages({ page: currentChat.currentPage + 1, recipientId: activeChat.id, senderId: user.id, messagesOffset: currentChat.messagesOffset })
+			);
 		} else if (messages.length && currentChat?.currentPage >= currentChat?.maxPage) {
 			setLoaded(true);
 		}
