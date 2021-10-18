@@ -21,8 +21,8 @@ export const getMessages =
 				senderId
 			});
 
-			const { maxPage, count, messages } = response.data;
-			dispatch({ type: GET_MESSAGES_SUCCESS, payload: { maxPage, count, messages, recipientId } });
+			const { maxPage, count, messages, currentPage } = response;
+			dispatch({ type: GET_MESSAGES_SUCCESS, payload: { maxPage, count, messages, currentPage, recipientId } });
 		} catch (error) {
 			console.log(error);
 			dispatch({ type: GET_MESSAGES_FAIL });

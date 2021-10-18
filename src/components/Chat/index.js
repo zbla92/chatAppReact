@@ -9,17 +9,14 @@ import { ReactComponent as GalleryIcon } from '../../assets/imgs/gallery.svg';
 import { ReactComponent as AttachIcon } from '../../assets/imgs/attach.svg';
 import { ReactComponent as MoreIcon } from '../../assets/imgs/more.svg';
 
-import Message from '../Message';
-
 import styles from './Chat.module.scss';
 import UserInfo from './components/UserInfo';
-import { getMessages } from '../../state/actions/messageActions';
+import MessagesList from './components/MessagesList';
 
 const Chat = ({ activeChat, socket }) => {
 	const [message, setMessage] = useState('');
 
 	const user = useSelector(state => state.auth.user?.data);
-	const currentChat = useSelector(state => state.message.chats[activeChat?.id]);
 
 	const dispatch = useDispatch();
 
@@ -40,10 +37,6 @@ const Chat = ({ activeChat, socket }) => {
 		if (e.keyCode === 13) sendMessage();
 	};
 
-	useEffect(() => {
-		if (user?.id && activeChat?.id) dispatch(getMessages({ page: 1, recipientId: activeChat.id, senderId: user.id }));
-	}, [activeChat, user]);
-
 	return (
 		<div className={styles.chat}>
 			{activeChat && (
@@ -52,13 +45,7 @@ const Chat = ({ activeChat, socket }) => {
 						<UserInfo name={activeChat.name} profilePicture={activeChat.profilePicture} />
 						<MoreIcon className={styles.more_icon} />
 					</div>
-					<div className={styles.content}>
-						<div className={styles.scroll}>
-							{currentChat?.map(msg => (
-								<Message message={msg} isMine={msg.senderId == user.id} />
-							))}
-						</div>
-					</div>
+					<MessagesList activeChat={activeChat} user={user} />
 					<div className={styles.bottom}>
 						<div className={styles.textarea_wrapper}>
 							<div className={styles.left_icons}>

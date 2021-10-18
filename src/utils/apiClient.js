@@ -21,7 +21,7 @@ axios.interceptors.response.use(
 	async err => {
 		const originalConfig = err.config;
 
-		if (originalConfig.url !== `${baseURL}/auth/user` && err.response) {
+		if (originalConfig.url !== `${baseURL}/auth/login` && err.response) {
 			// Access Token was expried
 			if (err.response.status === 401 && !originalConfig._retry) {
 				originalConfig._retry = true;
@@ -45,12 +45,7 @@ axios.interceptors.response.use(
 );
 
 const instance = (() => {
-	const get = (url, params) => {
-		if (params?.token) {
-			return axios.get(`${baseURL}${url}`, params);
-		}
-		return axios.get(`${baseURL}${url}`);
-	};
+	const get = (url, params) => axios.get(`${baseURL}${url}`);
 
 	const post = (url, params) => axios.post(`${baseURL}${url}`, params);
 

@@ -11,33 +11,34 @@ const chats = (state = chatsInitialState, action) => {
 
 	switch (type) {
 		case RECEIVED_NEW_MESSAGE: {
-			console.log('Reieived  message: ', payload);
 			let nextState = state;
 
 			nextState = produce(state, draft => {
 				if (state[payload.senderId]) {
-					draft[payload.senderId] = [...state[payload.senderId], payload];
-				} else draft[payload.senderId] = [payload];
+					draft[payload.senderId].messages = [...state[payload.senderId].messages, payload];
+				} else draft[payload.senderId] = { messages: [payload] };
 			});
 
 			return nextState;
 		}
 		case SENT_NEW_MESSAGE: {
-			console.log('sent message: ', payload);
 			let nextState = state;
 
 			nextState = produce(state, draft => {
-				if (state[payload.recipientId]) {
-					draft[payload.recipientId] = [...state[payload.recipientId], payload];
-				} else draft[payload.recipientId] = [payload];
+				if (state[payload.recipientId]?.messages) {
+					draft[payload.recipientId].messages = [...state[payload.recipientId].messages, payload];
+				} else draft[payload.recipientId] = { messages: [payload] };
 			});
 
 			return nextState;
 		}
 		case GET_MESSAGES_SUCCESS: {
-			const { maxPage, count, messages, recipientId } = payload;
+			const { maxPage, count, messages, recipientId, currentPage } = payload;
 			const newState = { ...state };
-			newState[recipientId] = messages;
+			if (state[recipientId]?.messages) {
+				newState[recipientId] = { messages: [...messages, ...state[recipientId].messages], count, maxPage, currentPage };
+			} else newState[recipientId] = { messages, count, maxPage, currentPage };
+
 			return newState;
 		}
 

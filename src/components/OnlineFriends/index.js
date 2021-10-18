@@ -38,7 +38,7 @@ const OnlineFriends = ({ setActiveChat, activeChat }) => {
 							activateChat={() => (friend.online ? setActiveChat(friend) : null)}
 							// eslint-disable-next-line eqeqeq
 							isActive={activeChat?.id == friend?.id}
-							lastMessage={chats[friend?.id]?.[chats[friend?.id]?.length - 1]?.message}
+							lastMessage={chats[friend.id]?.messages?.[chats[friend.id]?.messages?.length - 1]?.message}
 							isOnline={friend.online}
 						/>
 					))}
