@@ -1,0 +1,47 @@
+.masterContainer {
+	position: relative;
+	min-height: 50px;
+	min-width: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container {
+	position: absolute;
+}
+
+.loader_small {
+	width: 32px;
+	height: 32px;
+}
+
+.spinner::before {
+	content: '';
+	height: 100%;
+	width: 100%;
+	left: 0;
+	top: 0;
+	position: absolute;
+	border-radius: 50%;
+	border-right: 0.2rem solid transparent;
+	animation: loading 0.8s linear infinite;
+}
+
+.silver::before {
+	border-top: 0.2rem solid silver;
+}
+
+.gray::before {
+	border-top: 0.2rem solid gray;
+}
+
+.black::before {
+	border-top: 0.2rem solid black;
+}
+
+@keyframes loading {
+	to {
+		transform: rotate(360deg);
+	}
+}

@@ -1,28 +1,38 @@
 @import '../../assets/styles/globals.scss';
 
 .message {
-  width: 100%;
-  display: flex;
-  color: white;
-  font-weight: 300;
+	width: 100%;
+	display: flex;
+	color: white;
+	font-weight: 300;
 
-  &_wrapper {
-    height: fit-content;
-    padding: 18px;
-    margin: 8px;
-    border-radius: 0 16px 16px 16px;
-    background-color: #2e334d;
-    width: fit-content;
-    min-width: 100px;
-    max-width: 60%;
-  }
+	&_wrapper {
+		position: relative;
+		height: fit-content;
+		padding: 18px;
+		margin: 8px;
+		border-radius: 0 16px 16px 16px;
+		background-color: #2e334d;
+		width: fit-content;
+		max-width: 60%;
+		padding-right: 60px;
+	}
 }
 .isMine {
-  justify-content: flex-end;
-  .message_wrapper {
-    background-color: $primary_color;
-    text-align: right;
-    border-radius: unset;
-    border-radius: 16px 0 16px 16px;
-  }
+	justify-content: flex-end;
+	.message_wrapper {
+		background-color: $primary_color;
+		text-align: right;
+		border-radius: unset;
+		border-radius: 16px 0 16px 16px;
+	}
+}
+
+.time {
+	position: absolute;
+	right: 8px;
+	bottom: 6px;
+	font-size: 12px;
+	font-weight: 400;
+	opacity: 0.5;
 }
