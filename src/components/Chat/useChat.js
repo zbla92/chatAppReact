@@ -11,6 +11,8 @@ export default function useChat({ activeChat, user }) {
 
 	const [loaded, setLoaded] = useState(false);
 
+	const noHistory = currentChat?.maxPage < 1;
+
 	const dispatch = useDispatch();
 
 	const getMoreNotifications = () => {
@@ -22,6 +24,10 @@ export default function useChat({ activeChat, user }) {
 			setLoaded(true);
 		}
 	};
+
+	useEffect(() => {
+		if (noHistory) setLoaded(true);
+	}, [currentChat]);
 
 	useEffect(() => {
 		if (user?.id && activeChat?.id && !currentChat?.maxPage) dispatch(getMessages({ page: 1, recipientId: activeChat.id, senderId: user.id }));
@@ -56,5 +62,5 @@ export default function useChat({ activeChat, user }) {
 		return () => observer.disconnect();
 	}, [loader, loadMore]);
 
-	return { messages, loader, loaded };
+	return { messages, loader, loaded, noHistory };
 }

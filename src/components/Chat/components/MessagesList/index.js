@@ -9,7 +9,7 @@ import styles from './MessagesList.module.scss';
 import LoadingSpinner from '../../../LoadingSpinner/LoadingSpinner';
 
 const MessagesList = ({ activeChat, user }) => {
-	const { messages, loader, loaded } = useChat({ activeChat, user });
+	const { messages, loader, loaded, noHistory } = useChat({ activeChat, user });
 
 	const scrollRef = useRef(null);
 
@@ -22,7 +22,13 @@ const MessagesList = ({ activeChat, user }) => {
 	return (
 		<div className={styles.content} ref={scrollRef}>
 			<div className={styles.scroll}>
-				{loaded ? <p className={styles.completeChatHistoryLoaded}>This is complete chat history</p> : <LoadingSpinner />}
+				{loaded ? (
+					<p className={styles.completeChatHistoryLoaded}>
+						{noHistory ? `Start your conversation with ${activeChat.firstName}` : 'This is complete chat history'}
+					</p>
+				) : (
+					<LoadingSpinner />
+				)}
 				<div ref={loader} className={styles.observedLoader} />
 				{messages?.map(msg => (
 					// eslint-disable-next-line eqeqeq

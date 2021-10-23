@@ -19,13 +19,15 @@ const online = (state = onlineInitialState, action) => {
 		}
 
 		case FRIEND_CONNECTED: {
-			state[payload.userId].online = true;
-			return state;
+			const newState = { ...state };
+			newState[payload.userId].online = true;
+			return newState;
 		}
 
 		case FRIEND_DISCONNECTED: {
-			state[payload.userId].online = false;
-			return state;
+			const newState = { ...state };
+			newState[payload.userId].online = false;
+			return newState;
 		}
 
 		default:

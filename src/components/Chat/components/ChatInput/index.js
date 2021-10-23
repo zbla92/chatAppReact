@@ -40,7 +40,10 @@ const ChatInput = ({ activeChat, socket, user }) => {
 					<GalleryIcon />
 					<AttachIcon />
 				</div>
-				<textarea value={message} placeholder='Write a new message!' onChange={e => setMessage(e.target.value)} />
+				<div className={styles.textareaWrap}>
+					<textarea value={message} placeholder='Write a new message!' onChange={e => setMessage(e.target.value)} />
+					<div className={styles.border} />
+				</div>
 			</div>
 			<div className={styles.send_container}>
 				<button className={styles.send_button} onClick={sendMessage} type='button'>

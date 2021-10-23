@@ -32,8 +32,7 @@ const OnlineFriends = ({ setActiveChat, activeChat }) => {
 							key={friend.id}
 							name={`${friend.firstName} ${friend.lastName}`}
 							profilePicture={friend.profilePicture}
-							// friend.online check will be removed once we have support to send messages to online users
-							activateChat={() => (friend.online ? setActiveChat(friend) : null)}
+							activateChat={() => setActiveChat(friend)}
 							// eslint-disable-next-line eqeqeq
 							isActive={activeChat?.id == friend?.id}
 							lastMessage={chats[friend.id]?.messages?.[chats[friend.id]?.messages?.length - 1]?.message}
